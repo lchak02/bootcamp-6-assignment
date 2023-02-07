@@ -6,6 +6,7 @@ import Education from "./Forms/Education";
 
 export default function SectionLeft(props) {
   const [stage, setStage] = useState(1);
+  const [allValid, setAllValid] = useState(false);
   const navigate = useNavigate();
 
   function previousStage() {
@@ -13,36 +14,59 @@ export default function SectionLeft(props) {
     setStage(stage - 1);
   }
 
-  function nextStage() {
-    if (stage === 3) {
-      navigate("/success", { state: { name: "lasha" } });
-    }
-    setStage(stage + 1);
-  }
-
   function renderForm() {
     switch (stage) {
       case 1:
-        return <General onChange={props.onChange} />;
+        return <General setAllValid={setAllValid} />;
       case 2:
-        return <Experience onChange={props.onChange} />;
+        return <Experience setAllValid={setAllValid} />;
       case 3:
-        return <Education onChange={props.onChange} />;
-      default:
-        return <h1>dsakdsaj</h1>;
+        return <Education setAllValid={setAllValid} />;
     }
+  }
+
+  function handleOnSubmit(event) {
+    event.preventDefault();
+
+    if (!allValid) {
+      alert("Forma ar aris validuri");
+      return;
+    }
+
+    if (stage === 3) {
+      navigate("/success", { state: { name: "lasha" } });
+    }
+
+    setStage(stage + 1);
   }
 
   return (
     <div>
       <div>{stage}/3</div>
-      {renderForm()}
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <div>
-          {stage > 1 && <button onClick={previousStage}>prev</button>}
-          <button onClick={nextStage}>next</button>
+      <form
+        onSubmit={handleOnSubmit}
+        style={{
+          width: "700px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "50px",
+        }}
+      >
+        {renderForm()}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: stage > 1 ? "space-between" : "flex-end",
+          }}
+        >
+          {stage > 1 && (
+            <button type="button" onClick={previousStage}>
+              prev
+            </button>
+          )}
+          <button type="submit">next</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

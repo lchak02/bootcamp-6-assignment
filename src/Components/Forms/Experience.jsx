@@ -2,14 +2,7 @@ import Input from "../Input";
 
 export default function Experience(props) {
   return (
-    <form
-      style={{
-        width: "700px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "50px",
-      }}
-    >
+    <>
       <Input
         onChange={props.onChange}
         name={"position"}
@@ -39,6 +32,6 @@ export default function Experience(props) {
         </div>
       </div>
       <Input onChange={props.onChange} name={"description"} label={"აღწერა"} />
-    </form>
+    </>
   );
 }

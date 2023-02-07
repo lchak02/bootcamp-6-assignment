@@ -1,42 +1,65 @@
+import { useState } from "react";
 import Input from "../Input";
 
 export default function General(props) {
+  const [inputData, setInputData] = useState({
+    name: {
+      value: "",
+      isValid: false,
+    },
+    surname: {
+      value: "",
+      isValid: false,
+    },
+    aboutus: {
+      value: "",
+      isValid: false,
+    },
+    email: {
+      value: "",
+      isValid: false,
+    },
+    number: {
+      value: "",
+      isValid: false,
+    },
+  });
+
+  function onChange(inputName, inputValue, isValid) {
+    setInputData({
+      ...inputData,
+      [inputName]: { value: inputValue, isValid, isValid },
+    });
+
+    let isFormValid = true;
+
+    for (const key in inputData) {
+      if (!inputData[key].isValid) {
+        isFormValid = false;
+      }
+    }
+
+    props.setAllValid(isFormValid);
+  }
+
   return (
-    <form
-      style={{
-        width: "700px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "50px",
-      }}
-    >
+    <>
       <div style={{ display: "flex", justifyContent: "center", gap: "260px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input onChange={props.onChange} name={"name"} label={"სახელი"} />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input onChange={props.onChange} name={"surname"} label={"გვარი"} />
-        </div>
+        <Input onChange={onChange} name={"name"} label={"სახელი"} />
+        <Input onChange={onChange} name={"surname"} label={"გვარი"} />
       </div>
+
       <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input
-            onChange={props.onChange}
-            name={"aboutus"}
-            label={"ჩემ შესახებ(არასავალდებულო)"}
-          />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input onChange={props.onChange} name={"email"} label={"ელ.ფოსტა"} />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input
-            onChange={props.onChange}
-            name={"number"}
-            label={"მობილურის ნომერი"}
-          />
-        </div>
+        <Input
+          onChange={onChange}
+          name={"aboutus"}
+          label={"ჩემ შესახებ(არასავალდებულო)"}
+        />
+
+        <Input onChange={onChange} name={"email"} label={"ელ.ფოსტა"} />
+
+        <Input onChange={onChange} name={"number"} label={"მობილურის ნომერი"} />
       </div>
-    </form>
+    </>
   );
 }
