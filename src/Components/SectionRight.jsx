@@ -21,11 +21,30 @@ export default function SectionRight(props) {
         value={props.inputData.number}
         label={"მობილურის ნომერი"}
       />
+      <CustomParagraph value={props.inputData.position} label={"თანამდებობა"} />
+      <CustomParagraph
+        value={props.inputData.employee}
+        label={"დამსაქმებელი"}
+      />
+      <CustomParagraph
+        value={props.inputData.started_date}
+        label={"დაწყების რიცხვი"}
+      />
+      <CustomParagraph
+        value={props.inputData.ended_date}
+        label={"დამთავრების რიცხვი"}
+      />
+      <CustomParagraph value={props.inputData.description} label={"აღწერა"} />
       <CustomParagraph
         value={props.inputData.university}
         label={"სასწავლებელი"}
       />
       <CustomParagraph value={props.inputData.degree} label={"ხარისხი"} />
+      <CustomParagraph
+        value={props.inputData.ended_date}
+        label={"დამთავრების რიცხვი"}
+      />
+      <CustomParagraph value={props.inputData.description} label={"აღწერა"} />
     </div>
   );
 }

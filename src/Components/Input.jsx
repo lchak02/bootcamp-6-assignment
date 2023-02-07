@@ -8,6 +8,7 @@ export default function Input(props) {
         onChange={props.onChange}
         name={props.name}
         style={{ height: "25px", borderRadius: "4px" }}
+        type={props.type}
       />
     </>
   );

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "./Input";
+import Experience from "./Forms/Experience";
+import General from "./Forms/General";
+import Education from "./Forms/Education";
 
 export default function SectionLeft(props) {
   const [stage, setStage] = useState(1);
@@ -18,51 +20,23 @@ export default function SectionLeft(props) {
     setStage(stage + 1);
   }
 
+  function renderForm() {
+    switch (stage) {
+      case 1:
+        return <General onChange={props.onChange} />;
+      case 2:
+        return <Experience onChange={props.onChange} />;
+      case 3:
+        return <Education onChange={props.onChange} />;
+      default:
+        return <h1>dsakdsaj</h1>;
+    }
+  }
+
   return (
     <div>
       <div>{stage}/3</div>
-      <form
-        style={{
-          width: "700px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "50px",
-        }}
-      >
-        <div
-          style={{ display: "flex", justifyContent: "center", gap: "260px" }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Input onChange={props.onChange} name={"name"} label={"სახელი"} />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Input onChange={props.onChange} name={"surname"} label={"გვარი"} />
-          </div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Input
-              onChange={props.onChange}
-              name={"aboutus"}
-              label={"ჩემ შესახებ(არასავალდებულო)"}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Input
-              onChange={props.onChange}
-              name={"email"}
-              label={"ელ.ფოსტა"}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Input
-              onChange={props.onChange}
-              name={"number"}
-              label={"მობილურის ნომერი"}
-            />
-          </div>
-        </div>
-      </form>
+      {renderForm()}
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <div>
           {stage > 1 && <button onClick={previousStage}>prev</button>}
