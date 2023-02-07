@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Experience from "./Forms/Experience";
 import General from "./Forms/General";
 import Education from "./Forms/Education";
@@ -7,7 +6,6 @@ import Education from "./Forms/Education";
 export default function SectionLeft(props) {
   const [stage, setStage] = useState(1);
   const [allValid, setAllValid] = useState(false);
-  const navigate = useNavigate();
 
   function previousStage() {
     if (stage === 1) return;
@@ -17,11 +15,13 @@ export default function SectionLeft(props) {
   function renderForm() {
     switch (stage) {
       case 1:
-        return <General setAllValid={setAllValid} />;
+        return <General setAllValid={setAllValid} getData={props.onChange} />;
       case 2:
-        return <Experience setAllValid={setAllValid} />;
+        return (
+          <Experience setAllValid={setAllValid} getData={props.onChange} />
+        );
       case 3:
-        return <Education setAllValid={setAllValid} />;
+        return <Education setAllValid={setAllValid} getData={props.onChange} />;
     }
   }
 
@@ -34,7 +34,7 @@ export default function SectionLeft(props) {
     }
 
     if (stage === 3) {
-      navigate("/success", { state: { name: "lasha" } });
+      props.redirectSuccess();
     }
 
     setStage(stage + 1);

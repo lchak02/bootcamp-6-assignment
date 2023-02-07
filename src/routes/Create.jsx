@@ -1,20 +1,23 @@
-import Input from "../Components/Input";
 import { useState } from "react";
 import SectionRight from "../Components/SectionRight";
 import SectionLeft from "../Components/SectionLeft";
+import { useNavigate } from "react-router-dom";
 
 export default function Create() {
   const [inputData, setInputData] = useState({});
+  const navigate = useNavigate();
 
-  const getData = (event) => {
-    let target = event.target;
-    let inputName = target.name;
-
-    setInputData({ ...inputData, [inputName]: target.value });
+  const getData = (inputName, inputValue) => {
+    setInputData({ ...inputData, [inputName]: inputValue });
   };
+
+  function redirectSuccess() {
+    navigate("/success", { state: inputData });
+  }
+
   return (
     <div style={{ display: "flex", width: "100%", gap: "200px" }}>
-      <SectionLeft onChange={getData} />
+      <SectionLeft onChange={getData} redirectSuccess={redirectSuccess} />
       <SectionRight inputData={inputData} />
     </div>
   );

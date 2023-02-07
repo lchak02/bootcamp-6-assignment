@@ -14,10 +14,14 @@ export default function Input(props) {
 
     let inputName = target.name;
     let inputValue = target.value;
+    let inputType = target.type;
 
-    let isValid = inputValue.length > 2 && isGeorgianText(inputValue);
-
-    props.onChange(inputName, inputValue, isValid);
+    if (inputType === "date") {
+      props.onChange(inputName, inputValue, true);
+    } else {
+      let isValid = inputValue.length > 2 && isGeorgianText(inputValue);
+      props.onChange(inputName, inputValue, isValid);
+    }
   }
 
   return (
