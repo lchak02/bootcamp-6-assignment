@@ -8,8 +8,10 @@ export default function SectionRight(props) {
 
   return (
     <div>
-      <CustomParagraph value={props.inputData.name} label={"სახელი"} />
-      <CustomParagraph value={props.inputData.surname} label={"გვარი"} />
+      <div style={{ display: "flex" }}>
+        <CustomParagraph value={props.inputData.name} label={"სახელი"} />
+        <CustomParagraph value={props.inputData.surname} label={"გვარი"} />
+      </div>
       <CustomParagraph
         value={props.inputData.aboutus}
         label={"ჩვენ შესახებ(არასავალდებულო)"}
