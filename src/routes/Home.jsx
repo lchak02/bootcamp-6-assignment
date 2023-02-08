@@ -7,8 +7,31 @@ export default function Home() {
     navigate("/create");
   }
   return (
-    <button type="button" onClick={handleClick}>
-      რეზიუმეს დამატება
-    </button>
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
+        <button
+          style={{
+            width: "464px",
+            height: "60px",
+            color: "white",
+            backgroundColor: "black",
+            border: "none",
+            borderRadius: "8px",
+            fontSize: "18px",
+          }}
+          type="button"
+          onClick={handleClick}
+        >
+          რეზიუმეს დამატება
+        </button>
+      </div>
+    </div>
   );
 }

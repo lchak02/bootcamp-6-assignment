@@ -3,6 +3,8 @@ import SectionRight from "../Components/SectionRight";
 import SectionLeft from "../Components/SectionLeft";
 import { useNavigate } from "react-router-dom";
 
+const CreateStyle = { display: "flex", width: "100%", gap: "1px" };
+
 export default function Create() {
   const [inputData, setInputData] = useState({});
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ export default function Create() {
   }
 
   return (
-    <div style={{ display: "flex", width: "100%", gap: "200px" }}>
+    <div style={CreateStyle}>
       <SectionLeft onChange={getData} redirectSuccess={redirectSuccess} />
       <SectionRight inputData={inputData} />
     </div>

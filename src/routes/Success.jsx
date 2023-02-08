@@ -32,6 +32,7 @@ export default function Success() {
               justifyContent: "flex-start",
               gap: "30px",
               fontSize: "25px",
+              color: "#F93B1D",
             }}
           >
             <p>{state.name}</p>

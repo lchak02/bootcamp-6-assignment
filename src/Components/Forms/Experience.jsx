@@ -46,43 +46,68 @@ export default function Experience(props) {
   }
 
   return (
-    <>
-      <Input
-        onChange={onChange}
-        name={"position"}
-        label={"თანამდებობა"}
-        type={"text"}
-      />
-      <Input
-        onChange={onChange}
-        name={"employee"}
-        label={"დამსაქმებელი"}
-        type={"text"}
-      />
-      <div style={{ display: "flex", justifyContent: "center", gap: "260px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input
-            onChange={onChange}
-            name={"started_date"}
-            label={"დაწყების რიცხვი"}
-            type={"date"}
-          />
+    <div>
+      <>
+        <Input
+          onChange={onChange}
+          name={"position"}
+          label={"თანამდებობა"}
+          type={"text"}
+        />
+        <Input
+          onChange={onChange}
+          name={"employee"}
+          label={"დამსაქმებელი"}
+          type={"text"}
+        />
+        <div
+          style={{ display: "flex", justifyContent: "center", gap: "260px" }}
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Input
+              onChange={onChange}
+              name={"started_date"}
+              label={"დაწყების რიცხვი"}
+              type={"date"}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Input
+              onChange={onChange}
+              name={"ended_date"}
+              label={"დამთავრების რიცხვი"}
+              type={"date"}
+            />
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Input
-            onChange={onChange}
-            name={"ended_date"}
-            label={"დამთავრების რიცხვი"}
-            type={"date"}
-          />
-        </div>
+        <Input
+          onChange={onChange}
+          name={"description"}
+          label={"აღწერა"}
+          type={"text"}
+        />
+      </>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          padding: "100px 0px",
+        }}
+      >
+        <button
+          style={{
+            width: "247px",
+            height: "38px",
+            background: "#62A1EB",
+            borderRadius: "4px",
+            border: "none",
+            type: "button",
+          }}
+        >
+          მეტი გამოცდილების დამატება
+        </button>
       </div>
-      <Input
-        onChange={onChange}
-        name={"description"}
-        label={"აღწერა"}
-        type={"text"}
-      />
-    </>
+    </div>
   );
 }
