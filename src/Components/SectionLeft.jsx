@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Experience from "./Forms/Experience";
-import General from "./Forms/General";
-import Education from "./Forms/Education";
+import Experience from "./forms/Experience";
+import General from "./forms/General";
+import Education from "./forms/Education";
 import Header from "./Header";
 
 export default function SectionLeft(props) {
@@ -14,17 +14,23 @@ export default function SectionLeft(props) {
   }
 
   function renderForm() {
-    // return <Experience setAllValid={setAllValid} getData={props.onChange} />;
-
     switch (stage) {
       case 1:
         return <General setAllValid={setAllValid} getData={props.onChange} />;
       case 2:
         return (
-          <Experience setAllValid={setAllValid} getData={props.onChange} />
+          <Experience
+            setAllValid={setAllValid}
+            updateExperienceData={props.onExperienceChange}
+          />
         );
       case 3:
-        return <Education setAllValid={setAllValid} getData={props.onChange} />;
+        return (
+          <Education
+            setAllValid={setAllValid}
+            updateEducationData={props.onEducationChange}
+          />
+        );
     }
   }
 

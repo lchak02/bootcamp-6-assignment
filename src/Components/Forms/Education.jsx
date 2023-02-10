@@ -1,56 +1,40 @@
 import Input from "../Input";
 import { useEffect, useState } from "react";
-
-const educationOptions = [
-  "საშუალო სკოლის დიპლომი",
-  "ზოგადსაგანმანათლებლო დიპლომი",
-  "მაგისტრი",
-  "ბაკალავრი",
-  "დოქტორი",
-  "ასოცირებული ხარისხი",
-  "სტუდენტი",
-  "კოლეჯი(ხარისხის გარეშე)",
-  "სხვა",
-];
+import { EDUCATION_HISTORY_INITIAL, EDUCATION_OPTIONS } from "../../constants";
 
 export default function Education(props) {
-  const [inputData, setInputData] = useState({
-    university: {
-      value: "",
-      isValid: false,
-    },
-    degree: {
-      value: "",
-      isValid: false,
-    },
-    endeddate: {
-      value: "",
-      isValid: false,
-    },
-    edudescription: {
-      value: "",
-      isValid: false,
-    },
-  });
+  const [inputData, setInputData] = useState([EDUCATION_HISTORY_INITIAL]);
 
   useEffect(() => {
-    for (const key in inputData) {
-      if (!inputData[key].isValid) {
-        props.setAllValid(false);
-        return;
+    console.log(inputData);
+
+    for (const educationHistory in inputData) {
+      for (const inputName in educationHistory) {
+        if (!educationHistory[inputName].isValid) {
+          props.setAllValid(false);
+          return;
+        }
       }
     }
 
     props.setAllValid(true);
   }, [inputData]);
 
-  function onChange(inputName, inputValue, isValid) {
-    setInputData({
-      ...inputData,
-      [inputName]: { value: inputValue, isValid: isValid },
-    });
+  function onChange(orderNumber, inputName, inputValue, isValid) {
+    let inputDataCopy = [...inputData];
 
-    props.getData(inputName, inputValue);
+    inputDataCopy[orderNumber] = {
+      ...inputDataCopy[orderNumber],
+      [inputName]: { value: inputValue, isValid: isValid },
+    };
+
+    setInputData(inputDataCopy);
+
+    props.updateEducationData(inputDataCopy);
+  }
+
+  function handleAddEducation() {
+    setInputData([...inputData, EDUCATION_HISTORY_INITIAL]);
   }
 
   function onSelect(event) {
@@ -60,61 +44,72 @@ export default function Education(props) {
     onChange(name, value, true);
   }
 
+  function renderEducationHistory() {
+    return inputData.map((elem, index) => {
+      return (
+        <div key={index}>
+          <Input
+            onChange={onChange}
+            name={"university"}
+            label={"სასწავლებელი"}
+            type={"text"}
+            pattern="^[ა-ჰ]+$"
+            orderNumber={index}
+          />
+          <div
+            style={{ display: "flex", justifyContent: "center", gap: "150px" }}
+          >
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <select
+                name={"degree"}
+                style={{
+                  width: "350px",
+                  height: "38px",
+                  backgroundColor: "white",
+                  color: "black",
+                  borderRadius: "5px",
+                  padding: "5px",
+                  fontSize: "16px",
+                }}
+                onChange={onSelect}
+              >
+                <option value="choose" disabled selected hidden>
+                  აირჩიეთ ხარისხი
+                </option>
+                {EDUCATION_OPTIONS.map((elem) => (
+                  <option value={elem} key={elem}>
+                    {elem}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <Input
+                onChange={onChange}
+                name={"endeddate"}
+                label={"დამთავრების რიცხვი"}
+                type={"date"}
+                pattern="^[ა-ჰ]+$"
+                orderNumber={index}
+              />
+            </div>
+          </div>
+          <Input
+            onChange={onChange}
+            name={"edudescription"}
+            label={"აღწერა"}
+            type={"text"}
+            pattern="^[ა-ჰ]+$"
+            orderNumber={index}
+          />
+        </div>
+      );
+    });
+  }
+
   return (
     <div>
-      <>
-        <Input
-          onChange={onChange}
-          name={"university"}
-          label={"სასწავლებელი"}
-          type={"text"}
-          pattern="^[ა-ჰ]+$"
-        />
-        <div
-          style={{ display: "flex", justifyContent: "center", gap: "150px" }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <select
-              name={"degree"}
-              style={{
-                width: "350px",
-                height: "38px",
-                backgroundColor: "white",
-                color: "black",
-                borderRadius: "5px",
-                padding: "5px",
-                fontSize: "16px",
-              }}
-              onChange={onSelect}
-            >
-              <option value="choose" disabled selected hidden>
-                აირჩიეთ ხარისხი
-              </option>
-              {educationOptions.map((elem) => (
-                <option value={elem} key={elem}>
-                  {elem}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Input
-              onChange={onChange}
-              name={"endeddate"}
-              label={"დამთავრების რიცხვი"}
-              type={"date"}
-              pattern="^[ა-ჰ]+$"
-            />
-          </div>
-        </div>
-        <Input
-          onChange={onChange}
-          name={"edudescription"}
-          label={"აღწერა"}
-          type={"text"}
-          pattern="^[ა-ჰ]+$"
-        />
-      </>
+      {renderEducationHistory()}
       <div
         style={{
           display: "flex",
@@ -131,6 +126,8 @@ export default function Education(props) {
             border: "none",
             type: "button",
           }}
+          type={"button"}
+          onClick={handleAddEducation}
         >
           სხვა სასწავლებლების დამატება
         </button>

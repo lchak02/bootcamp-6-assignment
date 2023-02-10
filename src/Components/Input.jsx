@@ -22,7 +22,11 @@ export default function Input(props) {
     let inputPattern = target.pattern;
 
     if (inputType === "date") {
-      props.onChange(inputName, inputValue, true);
+      if (props.orderNumber >= 0) {
+        props.onChange(props.orderNumber, inputName, inputValue, true);
+      } else {
+        props.onChange(inputName, inputValue, true);
+      }
       setIsValid(true);
       return;
     }
@@ -33,7 +37,12 @@ export default function Input(props) {
     }
 
     let isValid = inputValue.length > 2 && validPattern;
-    props.onChange(inputName, inputValue, isValid);
+    if (props.orderNumber >= 0) {
+      props.onChange(props.orderNumber, inputName, inputValue, isValid);
+    } else {
+      props.onChange(inputName, inputValue, isValid);
+    }
+
     setIsValid(isValid);
   }
 
@@ -51,6 +60,7 @@ export default function Input(props) {
           borderRadius: "4px",
           background: "#FFFFFF",
           fontSize: "17.3px",
+          color: "black",
         }}
         type={props.type}
         pattern={props.pattern}

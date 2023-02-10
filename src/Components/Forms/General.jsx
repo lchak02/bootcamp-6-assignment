@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
-import ImageUpload from "../ImageUpload";
 import Input from "../Input";
 
 export default function General(props) {
-  // const [validEmail, setValidEmail] = useState(false);
-
-  // function handleChange() {
-  //   if (setValidEmail(validEmail, /^[a-zA-Z0-9.]+@redberry.ge$/)) return true;
-  // }
-
   const [inputData, setInputData] = useState({
     name: {
       value: "",

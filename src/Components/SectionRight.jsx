@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CustomParagraph from "./CustomParagraph";
 
 export default function SectionRight(props) {
@@ -34,21 +35,33 @@ export default function SectionRight(props) {
           <CustomParagraph value={props.inputData.number} />
           <CustomParagraph value={props.inputData.aboutus} />
         </div>
-        <div style={{ borderBottom: "1px solid black" }}>
-          <CustomParagraph value={props.inputData.position} />
-          <CustomParagraph value={props.inputData.employee} />
-          <div style={{ display: "flex", gap: "10px" }}>
-            <CustomParagraph value={props.inputData.started_date} />
-            <CustomParagraph value={props.inputData.ended_date} />
-          </div>
-          <CustomParagraph value={props.inputData.description} />
-        </div>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <CustomParagraph value={props.inputData.university} />
-          <CustomParagraph value={props.inputData.degree} />
-        </div>
-        <CustomParagraph value={props.inputData.endeddate} />
-        <CustomParagraph value={props.inputData.edudescription} />
+
+        {props.experienceData.map((elem, index) => {
+          return (
+            <div key={index} style={{ borderBottom: "1px solid black" }}>
+              <CustomParagraph value={elem.position.value} />
+              <CustomParagraph value={elem.employee.value} />
+              <div style={{ display: "flex", gap: "10px" }}>
+                <CustomParagraph value={elem.started_date.value} />
+                <CustomParagraph value={elem.ended_date.value} />
+              </div>
+              <CustomParagraph value={elem.description.value} />
+            </div>
+          );
+        })}
+
+        {props.educationData.map((elem, index) => {
+          return (
+            <div key={index}>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <CustomParagraph value={elem.university.value} />
+                <CustomParagraph value={elem.degree.value} />
+              </div>
+              <CustomParagraph value={elem.endeddate.value} />
+              <CustomParagraph value={elem.edudescription.value} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
