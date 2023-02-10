@@ -14,6 +14,8 @@ export default function SectionLeft(props) {
   }
 
   function renderForm() {
+    // return <Experience setAllValid={setAllValid} getData={props.onChange} />;
+
     switch (stage) {
       case 1:
         return <General setAllValid={setAllValid} getData={props.onChange} />;
@@ -44,12 +46,32 @@ export default function SectionLeft(props) {
   return (
     <div
       style={{
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#f2f2f2",
         padding: "20px 70px 170px 70px",
         height: "100%",
         width: "1020px",
+        position: "relative",
       }}
     >
+      <div>
+        <button
+          style={{
+            position: "absolute",
+            width: "40px",
+            height: "40px",
+            left: "15px",
+            top: "45px",
+            backgroundColor: "white",
+            color: "black",
+            borderRadius: "50%",
+            border: "none",
+          }}
+          type="button"
+          onClick={previousStage}
+        >
+          {"<"}
+        </button>
+      </div>
       <div
         style={{
           display: "flex",

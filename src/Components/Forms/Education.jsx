@@ -68,6 +68,7 @@ export default function Education(props) {
           name={"university"}
           label={"სასწავლებელი"}
           type={"text"}
+          pattern="^[ა-ჰ]+$"
         />
         <div
           style={{ display: "flex", justifyContent: "center", gap: "150px" }}
@@ -102,6 +103,7 @@ export default function Education(props) {
               name={"endeddate"}
               label={"დამთავრების რიცხვი"}
               type={"date"}
+              pattern="^[ა-ჰ]+$"
             />
           </div>
         </div>
@@ -110,6 +112,7 @@ export default function Education(props) {
           name={"edudescription"}
           label={"აღწერა"}
           type={"text"}
+          pattern="^[ა-ჰ]+$"
         />
       </>
       <div

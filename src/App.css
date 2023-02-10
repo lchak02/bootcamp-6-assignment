@@ -6,3 +6,34 @@
   text-align: center;
   box-sizing: border-box;
 }
+
+.input {
+  border: 2px solid rgb(188, 188, 188);
+  /* position: relative; */
+}
+
+.input.valid {
+  border-color: #98e37e;
+}
+
+.input.invalid {
+  border-color: #ef5050;
+}
+
+.input.invalid::after {
+  background-image: url("./assets/incorrectIcon.png");
+  background-size: 20px 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+}
+
+.input.invalid::before {
+  background-image: url("./assets/incorrectIcon.png");
+  background-size: 20px 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+}

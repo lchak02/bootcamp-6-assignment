@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
+import ImageUpload from "../ImageUpload";
 import Input from "../Input";
 
 export default function General(props) {
+  // const [validEmail, setValidEmail] = useState(false);
+
+  // function handleChange() {
+  //   if (setValidEmail(validEmail, /^[a-zA-Z0-9.]+@redberry.ge$/)) return true;
+  // }
+
   const [inputData, setInputData] = useState({
     name: {
       value: "",
       isValid: false,
     },
     surname: {
+      value: "",
+      isValid: false,
+    },
+    personalImage: {
       value: "",
       isValid: false,
     },
@@ -53,14 +64,23 @@ export default function General(props) {
           name={"name"}
           label={"სახელი"}
           type={"text"}
+          pattern="^[ა-ჰ]+$"
         />
         <Input
           onChange={onChange}
           name={"surname"}
           label={"გვარი"}
           type={"text"}
+          pattern="^[ა-ჰ]+$"
         />
       </div>
+      <ImageUpload
+        onChange={onChange}
+        name={"personalImage"}
+        label={"პირადი ფოტოს ატვირთვა"}
+        type={"file"}
+        accept={"image/*"}
+      />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
         <Input
@@ -68,6 +88,7 @@ export default function General(props) {
           name={"aboutus"}
           label={"ჩემ შესახებ(არასავალდებულო)"}
           type={"text"}
+          pattern="^[ა-ჰ]+$"
         />
 
         <Input
@@ -75,6 +96,7 @@ export default function General(props) {
           name={"email"}
           label={"ელ.ფოსტა"}
           type={"text"}
+          pattern="^[a-zA-Z0-9.]+@redberry.ge$"
         />
 
         <Input
@@ -82,6 +104,7 @@ export default function General(props) {
           name={"number"}
           label={"მობილურის ნომერი"}
           type={"text"}
+          pattern="^(\+?995)?(79\d{7}|5\d{8})$"
         />
       </div>
     </>

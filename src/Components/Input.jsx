@@ -3,37 +3,38 @@ import { useState } from "react";
 export default function Input(props) {
   let [isValid, setIsValid] = useState(null);
 
-  const isGeorgianText = (text) => {
-    let geoAlph = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ";
-    for (let char of text) {
-      if (!geoAlph.includes(char)) {
-        return false;
-      }
-    }
-    return true;
-  };
+  function getClassName() {
+    if (isValid === null) return "input";
 
-  function getBorderColor() {
-    if (isValid === null) return "black";
+    return isValid ? "input valid" : "input invalid";
+  }
 
-    return isValid ? "green" : "red";
+  function matchesPattern(inputValue, inputPattern) {
+    return new RegExp(inputPattern).test(inputValue);
   }
 
   function onChange(event) {
     let target = event.target;
+
     let inputName = target.name;
     let inputValue = target.value;
     let inputType = target.type;
+    let inputPattern = target.pattern;
 
     if (inputType === "date") {
-      let isValid = true;
-      props.onChange(inputName, inputValue, isValid);
-      setIsValid(isValid);
-    } else {
-      let isValid = inputValue.length > 2 && isGeorgianText(inputValue);
-      props.onChange(inputName, inputValue, isValid);
-      setIsValid(isValid);
+      props.onChange(inputName, inputValue, true);
+      setIsValid(true);
+      return;
     }
+
+    let validPattern = true;
+    if (inputPattern) {
+      validPattern = matchesPattern(inputValue, inputPattern);
+    }
+
+    let isValid = inputValue.length > 2 && validPattern;
+    props.onChange(inputName, inputValue, isValid);
+    setIsValid(isValid);
   }
 
   return (
@@ -42,18 +43,18 @@ export default function Input(props) {
         {props.label}
       </label>
       <input
+        className={getClassName()}
         onChange={onChange}
         name={props.name}
         style={{
           height: "38px",
           borderRadius: "4px",
           background: "#FFFFFF",
-          color: "black",
           fontSize: "17.3px",
-          border: "2px solid #BCBCBC",
-          borderColor: getBorderColor(),
         }}
         type={props.type}
+        pattern={props.pattern}
+        placeholder={props.placeholder}
       />
     </div>
   );

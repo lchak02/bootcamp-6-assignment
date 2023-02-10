@@ -27,6 +27,7 @@ export default function SectionRight(props) {
         >
           <CustomParagraph value={props.inputData.name} />
           <CustomParagraph value={props.inputData.surname} />
+          <CustomParagraph value={props.inputData.personalImage} />
         </div>
         <div style={{ borderBottom: "1px solid black" }}>
           <CustomParagraph value={props.inputData.email} />
