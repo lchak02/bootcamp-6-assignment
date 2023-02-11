@@ -1,42 +1,69 @@
 const WORK_HISTORY_INITIAL = {
   position: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   employee: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   started_date: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   ended_date: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   description: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
 };
 
 const EDUCATION_HISTORY_INITIAL = {
   university: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   degree: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   endeddate: {
     value: "",
-    isValid: false,
+    isValid: null,
   },
   edudescription: {
     value: "",
-    isValid: false,
+    isValid: null,
+  },
+};
+
+const GENERAL_INFO_INITIAL = {
+  name: {
+    value: "",
+    isValid: null,
+  },
+  surname: {
+    value: "",
+    isValid: null,
+  },
+  // personalImage: {
+  //   value: "",
+  //   isValid: null,
+  // },
+  aboutus: {
+    value: "",
+    isValid: null,
+  },
+  email: {
+    value: "",
+    isValid: null,
+  },
+  number: {
+    value: "",
+    isValid: null,
   },
 };
 
@@ -52,4 +79,9 @@ const EDUCATION_OPTIONS = [
   "სხვა",
 ];
 
-export { WORK_HISTORY_INITIAL, EDUCATION_HISTORY_INITIAL, EDUCATION_OPTIONS };
+export {
+  WORK_HISTORY_INITIAL,
+  EDUCATION_HISTORY_INITIAL,
+  GENERAL_INFO_INITIAL,
+  EDUCATION_OPTIONS,
+};

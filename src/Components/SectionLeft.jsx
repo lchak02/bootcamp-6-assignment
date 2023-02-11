@@ -3,8 +3,10 @@ import Experience from "./forms/Experience";
 import General from "./forms/General";
 import Education from "./forms/Education";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 export default function SectionLeft(props) {
+  const navigate = useNavigate();
   const [stage, setStage] = useState(1);
   const [allValid, setAllValid] = useState(false);
 
@@ -16,10 +18,17 @@ export default function SectionLeft(props) {
   function renderForm() {
     switch (stage) {
       case 1:
-        return <General setAllValid={setAllValid} getData={props.onChange} />;
+        return (
+          <General
+            generalData={props.generalData}
+            setAllValid={setAllValid}
+            updateGeneralData={props.onGeneralChange}
+          />
+        );
       case 2:
         return (
           <Experience
+            experienceData={props.experienceData}
             setAllValid={setAllValid}
             updateExperienceData={props.onExperienceChange}
           />
@@ -27,11 +36,20 @@ export default function SectionLeft(props) {
       case 3:
         return (
           <Education
+            educationData={props.educationData}
             setAllValid={setAllValid}
             updateEducationData={props.onEducationChange}
           />
         );
     }
+  }
+
+  function handleGoBack() {
+    localStorage.removeItem("generalData");
+    localStorage.removeItem("experienceData");
+    localStorage.removeItem("educationData");
+
+    navigate("/");
   }
 
   function handleOnSubmit(event) {
@@ -43,7 +61,7 @@ export default function SectionLeft(props) {
     }
 
     if (stage === 3) {
-      props.redirectSuccess();
+      navigate("/success");
     }
 
     setStage(stage + 1);
@@ -55,7 +73,7 @@ export default function SectionLeft(props) {
         backgroundColor: "#f2f2f2",
         padding: "20px 70px 170px 70px",
         height: "100%",
-        width: "1020px",
+        width: "75%",
         position: "relative",
       }}
     >
@@ -73,7 +91,7 @@ export default function SectionLeft(props) {
             border: "none",
           }}
           type="button"
-          onClick={previousStage}
+          onClick={handleGoBack}
         >
           {"<"}
         </button>

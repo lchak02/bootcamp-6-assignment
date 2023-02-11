@@ -1,11 +1,10 @@
-import { useEffect } from "react";
 import CustomParagraph from "./CustomParagraph";
 
 export default function SectionRight(props) {
   return (
     <div
       style={{
-        width: "802px",
+        width: "25%",
       }}
     >
       <div
@@ -26,39 +25,38 @@ export default function SectionRight(props) {
             color: "#F93B1D",
           }}
         >
-          <CustomParagraph value={props.inputData.name} />
-          <CustomParagraph value={props.inputData.surname} />
-          <CustomParagraph value={props.inputData.personalImage} />
+          <CustomParagraph value={props.generalData.name.value} />
+          <CustomParagraph value={props.generalData.surname.value} />
         </div>
         <div style={{ borderBottom: "1px solid black" }}>
-          <CustomParagraph value={props.inputData.email} />
-          <CustomParagraph value={props.inputData.number} />
-          <CustomParagraph value={props.inputData.aboutus} />
+          <CustomParagraph value={props.generalData.email.value} />
+          <CustomParagraph value={props.generalData.number.value} />
+          <CustomParagraph value={props.generalData.aboutus.value} />
         </div>
 
-        {props.experienceData.map((elem, index) => {
+        {props.experienceData.map((data, index) => {
           return (
             <div key={index} style={{ borderBottom: "1px solid black" }}>
-              <CustomParagraph value={elem.position.value} />
-              <CustomParagraph value={elem.employee.value} />
+              <CustomParagraph value={data.position.value} />
+              <CustomParagraph value={data.employee.value} />
               <div style={{ display: "flex", gap: "10px" }}>
-                <CustomParagraph value={elem.started_date.value} />
-                <CustomParagraph value={elem.ended_date.value} />
+                <CustomParagraph value={data.started_date.value} />
+                <CustomParagraph value={data.ended_date.value} />
               </div>
-              <CustomParagraph value={elem.description.value} />
+              <CustomParagraph value={data.description.value} />
             </div>
           );
         })}
 
-        {props.educationData.map((elem, index) => {
+        {props.educationData.map((data, index) => {
           return (
             <div key={index}>
               <div style={{ display: "flex", gap: "10px" }}>
-                <CustomParagraph value={elem.university.value} />
-                <CustomParagraph value={elem.degree.value} />
+                <CustomParagraph value={data.university.value} />
+                <CustomParagraph value={data.degree.value} />
               </div>
-              <CustomParagraph value={elem.endeddate.value} />
-              <CustomParagraph value={elem.edudescription.value} />
+              <CustomParagraph value={data.endeddate.value} />
+              <CustomParagraph value={data.edudescription.value} />
             </div>
           );
         })}

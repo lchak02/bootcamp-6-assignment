@@ -1,33 +1,13 @@
 import { useEffect, useState } from "react";
 import Input from "../Input";
+import { GENERAL_INFO_INITIAL } from "../../constants";
 
 export default function General(props) {
-  const [inputData, setInputData] = useState({
-    name: {
-      value: "",
-      isValid: false,
-    },
-    surname: {
-      value: "",
-      isValid: false,
-    },
-    personalImage: {
-      value: "",
-      isValid: false,
-    },
-    aboutus: {
-      value: "",
-      isValid: false,
-    },
-    email: {
-      value: "",
-      isValid: false,
-    },
-    number: {
-      value: "",
-      isValid: false,
-    },
-  });
+  const [inputData, setInputData] = useState(GENERAL_INFO_INITIAL);
+
+  useEffect(() => {
+    setInputData(props.generalData);
+  }, []);
 
   useEffect(() => {
     for (const key in inputData) {
@@ -41,12 +21,13 @@ export default function General(props) {
   }, [inputData]);
 
   function onChange(inputName, inputValue, isValid) {
-    setInputData({
+    let newInputData = {
       ...inputData,
       [inputName]: { value: inputValue, isValid: isValid },
-    });
+    };
 
-    props.getData(inputName, inputValue);
+    setInputData(newInputData);
+    props.updateGeneralData(newInputData);
   }
 
   return (
@@ -58,6 +39,8 @@ export default function General(props) {
           label={"სახელი"}
           type={"text"}
           pattern="^[ა-ჰ]+$"
+          minLength={2}
+          value={inputData.name.value}
         />
         <Input
           onChange={onChange}
@@ -65,15 +48,17 @@ export default function General(props) {
           label={"გვარი"}
           type={"text"}
           pattern="^[ა-ჰ]+$"
+          minLength={2}
+          value={inputData.surname.value}
         />
       </div>
-      <ImageUpload
+      {/* <ImageUpload
         onChange={onChange}
         name={"personalImage"}
         label={"პირადი ფოტოს ატვირთვა"}
         type={"file"}
         accept={"image/*"}
-      />
+      /> */}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
         <Input
@@ -81,7 +66,7 @@ export default function General(props) {
           name={"aboutus"}
           label={"ჩემ შესახებ(არასავალდებულო)"}
           type={"text"}
-          pattern="^[ა-ჰ]+$"
+          value={inputData.aboutus.value}
         />
 
         <Input
@@ -90,6 +75,7 @@ export default function General(props) {
           label={"ელ.ფოსტა"}
           type={"text"}
           pattern="^[a-zA-Z0-9.]+@redberry.ge$"
+          value={inputData.email.value}
         />
 
         <Input
@@ -98,6 +84,7 @@ export default function General(props) {
           label={"მობილურის ნომერი"}
           type={"text"}
           pattern="^(\+?995)?(79\d{7}|5\d{8})$"
+          value={inputData.number.value}
         />
       </div>
     </>

@@ -6,8 +6,6 @@ export default function Education(props) {
   const [inputData, setInputData] = useState([EDUCATION_HISTORY_INITIAL]);
 
   useEffect(() => {
-    console.log(inputData);
-
     for (const educationHistory in inputData) {
       for (const inputName in educationHistory) {
         if (!educationHistory[inputName].isValid) {
