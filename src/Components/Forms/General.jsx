@@ -52,14 +52,12 @@ export default function General(props) {
           value={inputData.surname.value}
         />
       </div>
-      {/* <ImageUpload
+      <Input
         onChange={onChange}
-        name={"personalImage"}
-        label={"პირადი ფოტოს ატვირთვა"}
+        name={"image"}
+        label={["პირადი ფოტოს ატვირთვა", "ატვირთვა"]}
         type={"file"}
-        accept={"image/*"}
-      /> */}
-
+      />
       <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
         <Input
           onChange={onChange}

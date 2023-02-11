@@ -49,10 +49,10 @@ const GENERAL_INFO_INITIAL = {
     value: "",
     isValid: null,
   },
-  // personalImage: {
-  //   value: "",
-  //   isValid: null,
-  // },
+  image: {
+    value: "",
+    isValid: null,
+  },
   aboutus: {
     value: "",
     isValid: null,
