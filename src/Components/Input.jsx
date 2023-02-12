@@ -90,14 +90,29 @@ export default function Input(props) {
   return (
     <>
       {props.type === "file" ? (
-        <>
+        <div
+          style={{
+            display: "flex",
+            gap: "15px",
+            padding: "30px 0px 30px 0px",
+          }}
+        >
           <label
             htmlFor={props.name}
             style={{ textAlign: "left", color: "black" }}
           >
             {props.label[0]}
           </label>
-          <button onClick={() => uploadFileRef.current.click()} type="button">
+          <button
+            style={{
+              width: "90px",
+              background: "#0E80BF",
+              borderRadius: "4px",
+              border: "none",
+            }}
+            onClick={() => uploadFileRef.current.click()}
+            type="button"
+          >
             {props.label[1]}
           </button>
           <input
@@ -107,24 +122,37 @@ export default function Input(props) {
             onChange={onChange}
             style={{ display: "none" }}
           />
-        </>
+        </div>
       ) : (
-        <div className={getClassName()}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <label
             htmlFor={props.name}
             style={{ textAlign: "left", color: "black" }}
           >
             {props.label}
           </label>
-          <input
-            onChange={onChange}
-            name={props.name}
-            style={InputStyle}
-            type={props.type}
-            placeholder={props.placeholder}
-            value={props.value}
-          />
-          <div className="icon"></div>
+          <div className={getClassName()}>
+            <input
+              onChange={onChange}
+              name={props.name}
+              style={InputStyle}
+              type={props.type}
+              placeholder={props.placeholder}
+              value={props.value}
+            />
+
+            <div className="icon"></div>
+          </div>
+          <p
+            style={{
+              display: "flex",
+              fontSize: "12px",
+              color: "black",
+              opacity: "0.5",
+            }}
+          >
+            {props.hintMessage}
+          </p>
         </div>
       )}
     </>

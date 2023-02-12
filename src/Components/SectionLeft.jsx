@@ -84,9 +84,9 @@ export default function SectionLeft(props) {
     <div
       style={{
         backgroundColor: "#f2f2f2",
-        padding: "20px 70px 170px 70px",
+        padding: "20px 70px 10px 70px",
         height: "100%",
-        width: "75%",
+        width: "55%",
         position: "relative",
       }}
     >
@@ -125,7 +125,7 @@ export default function SectionLeft(props) {
           width: "700px",
           display: "flex",
           flexDirection: "column",
-          gap: "50px",
+          gap: "40px",
         }}
       >
         {renderForm()}
@@ -140,7 +140,7 @@ export default function SectionLeft(props) {
               style={{
                 backgroundColor: "#6B40E3",
                 width: "151px",
-                height: "48px",
+                height: "40px",
                 borderRadius: "4px",
               }}
               type="button"

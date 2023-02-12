@@ -26,14 +26,14 @@ export default function Education(props) {
   }, [props.triggerValidation]);
 
   useEffect(() => {
-    for (const educationHistory in inputData) {
-      for (const inputName in educationHistory) {
-        if (!educationHistory[inputName].isValid) {
+    inputData.forEach(function (value, index) {
+      Object.keys(value).forEach(function (key) {
+        if (!value[key].isValid) {
           props.setCanGoNext(false);
           return;
         }
-      }
-    }
+      });
+    });
 
     props.setCanGoNext(true);
   }, [inputData]);

@@ -63,6 +63,7 @@ export default function General(props) {
               minLength={2}
               value={inputData.name.value}
               isValid={inputData.name.isValid}
+              hintMessage={"მინიმუმ 2 ასო, ქართული ასოებით"}
             />
             <Input
               onChange={onChange}
@@ -73,6 +74,7 @@ export default function General(props) {
               minLength={2}
               value={inputData.surname.value}
               isValid={inputData.surname.isValid}
+              hintMessage={"მინიმუმ 2 ასო, ქართული ასოებით"}
             />
           </div>
           <Input
@@ -84,7 +86,7 @@ export default function General(props) {
             isValid={inputData.image.isValid}
           />
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "50px" }}
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >
             <Input
               onChange={onChange}
@@ -103,6 +105,7 @@ export default function General(props) {
               pattern="^[a-zA-Z0-9.]+@redberry.ge$"
               value={inputData.email.value}
               isValid={inputData.email.isValid}
+              hintMessage={"უნდა მთავრდებოდეს @redberry.ge -ით"}
             />
 
             <Input
@@ -113,6 +116,9 @@ export default function General(props) {
               pattern="^(\+?995)?(79\d{7}|5\d{8})$"
               value={inputData.number.value}
               isValid={inputData.number.isValid}
+              hintMessage={
+                "უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფირმატს"
+              }
             />
           </div>
         </>

@@ -26,14 +26,14 @@ export default function Experience(props) {
   }, [props.triggerValidation]);
 
   useEffect(() => {
-    for (const workHistory in inputData) {
-      for (const inputName in workHistory) {
-        if (!workHistory[inputName].isValid) {
+    inputData.forEach(function (value, index) {
+      Object.keys(value).forEach(function (key) {
+        if (!value[key].isValid) {
           props.setCanGoNext(false);
           return;
         }
-      }
-    }
+      });
+    });
 
     props.setCanGoNext(true);
   }, [inputData]);
@@ -67,6 +67,7 @@ export default function Experience(props) {
             orderNumber={index}
             value={data.position.value}
             isValid={data.position.isValid}
+            hintMessage={"მინიმუმ 2 სიმბოლო"}
           />
           <Input
             onChange={onChange}
@@ -77,6 +78,7 @@ export default function Experience(props) {
             orderNumber={index}
             value={data.employee.value}
             isValid={data.employee.isValid}
+            hintMessage={"მინიმუმ 2 სიმბოლო"}
           />
           <div
             style={{ display: "flex", justifyContent: "center", gap: "260px" }}
@@ -124,20 +126,22 @@ export default function Experience(props) {
   return (
     <div>
       {isDataLoaded && renderWorkHistory()}
-      <button
-        style={{
-          width: "247px",
-          height: "38px",
-          background: "#62A1EB",
-          borderRadius: "4px",
-          border: "none",
-          type: "button",
-        }}
-        type="button"
-        onClick={handleAddHistory}
-      >
-        მეტი გამოცდილების დამატება
-      </button>
+      <div style={{ display: "flex", padding: "50px 0px 30px 0px" }}>
+        <button
+          style={{
+            width: "247px",
+            height: "38px",
+            background: "#62A1EB",
+            borderRadius: "4px",
+            border: "none",
+            type: "button",
+          }}
+          type="button"
+          onClick={handleAddHistory}
+        >
+          მეტი გამოცდილების დამატება
+        </button>
+      </div>
     </div>
   );
 }

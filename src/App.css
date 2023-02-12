@@ -30,7 +30,7 @@
   width: 1.5rem;
   position: absolute;
   box-sizing: border-box;
-  top: calc(50% + 0.75rem);
+  top: 50%;
   transform: translateY(-50%);
 }
 
