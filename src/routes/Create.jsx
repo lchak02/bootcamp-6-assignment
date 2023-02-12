@@ -22,7 +22,7 @@ export default function Create() {
     let storageGeneralData = localStorage.getItem("generalData");
     let storageExperienceData = localStorage.getItem("experienceData");
     let storageEducationData = localStorage.getItem("educationData");
-    let stageData = localStorage.getItem("stage");
+    let stageData = localStorage.getItem("stageData");
 
     if (storageGeneralData) {
       setGeneralData(JSON.parse(storageGeneralData));

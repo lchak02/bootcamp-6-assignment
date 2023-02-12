@@ -7,33 +7,39 @@
   box-sizing: border-box;
 }
 
-.input {
-  border: 2px solid rgb(188, 188, 188);
-  /* position: relative; */
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.input.valid {
+.input-wrapper input {
+  border: 2px solid rgb(188, 188, 188);
+}
+
+.input-wrapper.valid input {
   border-color: #98e37e;
 }
 
-.input.invalid {
+.input-wrapper.invalid input {
   border-color: #ef5050;
 }
 
-.input.invalid::after {
-  background-image: url("./assets/incorrectIcon.png");
-  background-size: 20px 20px;
+.input-wrapper .icon {
+  height: 1.5rem;
+  width: 1.5rem;
   position: absolute;
-  left: 0;
-  top: 0;
-  content: "";
+  box-sizing: border-box;
+  top: calc(50% + 0.75rem);
+  transform: translateY(-50%);
 }
 
-.input.invalid::before {
-  background-image: url("./assets/incorrectIcon.png");
-  background-size: 20px 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  content: "";
+.input-wrapper.valid .icon {
+  background: url("./assets/icons/validInput.png") center no-repeat;
+  right: 0.75rem;
+}
+
+.input-wrapper.invalid .icon {
+  background: url("./assets/icons/invalidInput.png") center no-repeat;
+  right: -1.75rem;
 }

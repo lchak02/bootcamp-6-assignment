@@ -18,9 +18,10 @@ export default function Input(props) {
   }, [props.isValid]);
 
   function getClassName() {
-    if (isInputValid === null) return "input";
+    const base = "input-wrapper";
+    if (isInputValid === null) return base;
 
-    return isInputValid ? "input valid" : "input invalid";
+    return isInputValid ? `${base} valid` : `${base} invalid`;
   }
 
   function matchesPattern(inputValue, inputPattern) {
@@ -87,7 +88,7 @@ export default function Input(props) {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <>
       {props.type === "file" ? (
         <>
           <label
@@ -108,7 +109,7 @@ export default function Input(props) {
           />
         </>
       ) : (
-        <>
+        <div className={getClassName()}>
           <label
             htmlFor={props.name}
             style={{ textAlign: "left", color: "black" }}
@@ -116,7 +117,6 @@ export default function Input(props) {
             {props.label}
           </label>
           <input
-            className={getClassName()}
             onChange={onChange}
             name={props.name}
             style={InputStyle}
@@ -124,8 +124,9 @@ export default function Input(props) {
             placeholder={props.placeholder}
             value={props.value}
           />
-        </>
+          <div className="icon"></div>
+        </div>
       )}
-    </div>
+    </>
   );
 }

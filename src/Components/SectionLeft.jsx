@@ -19,7 +19,7 @@ export default function SectionLeft(props) {
   function previousStage() {
     if (stage === 1) return;
 
-    localStorage.setItem("stage", JSON.stringify(stage - 1));
+    localStorage.setItem("stageData", JSON.stringify(stage - 1));
     setStage(stage - 1);
   }
 
@@ -59,6 +59,7 @@ export default function SectionLeft(props) {
     localStorage.removeItem("generalData");
     localStorage.removeItem("experienceData");
     localStorage.removeItem("educationData");
+    localStorage.removeItem("stageData");
 
     navigate("/");
   }
@@ -75,7 +76,7 @@ export default function SectionLeft(props) {
       navigate("/success");
     }
 
-    localStorage.setItem("stage", JSON.stringify(stage + 1));
+    localStorage.setItem("stageData", JSON.stringify(stage + 1));
     setStage(stage + 1);
   }
 
