@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Experience from "./forms/Experience";
 import General from "./forms/General";
 import Education from "./forms/Education";
@@ -7,11 +7,18 @@ import { useNavigate } from "react-router-dom";
 
 export default function SectionLeft(props) {
   const navigate = useNavigate();
+
   const [stage, setStage] = useState(1);
-  const [allValid, setAllValid] = useState(false);
+  const [canGoNext, setCanGoNext] = useState(false);
+
+  useEffect(() => {
+    setStage(props.stageData);
+  }, []);
 
   function previousStage() {
     if (stage === 1) return;
+
+    localStorage.setItem("stage", JSON.stringify(stage - 1));
     setStage(stage - 1);
   }
 
@@ -21,7 +28,7 @@ export default function SectionLeft(props) {
         return (
           <General
             generalData={props.generalData}
-            setAllValid={setAllValid}
+            setCanGoNext={setCanGoNext}
             updateGeneralData={props.onGeneralChange}
           />
         );
@@ -29,7 +36,7 @@ export default function SectionLeft(props) {
         return (
           <Experience
             experienceData={props.experienceData}
-            setAllValid={setAllValid}
+            setCanGoNext={setCanGoNext}
             updateExperienceData={props.onExperienceChange}
           />
         );
@@ -37,7 +44,7 @@ export default function SectionLeft(props) {
         return (
           <Education
             educationData={props.educationData}
-            setAllValid={setAllValid}
+            setCanGoNext={setCanGoNext}
             updateEducationData={props.onEducationChange}
           />
         );
@@ -55,8 +62,7 @@ export default function SectionLeft(props) {
   function handleOnSubmit(event) {
     event.preventDefault();
 
-    if (!allValid) {
-      alert("Forma ar aris validuri");
+    if (!canGoNext) {
       return;
     }
 
@@ -64,6 +70,7 @@ export default function SectionLeft(props) {
       navigate("/success");
     }
 
+    localStorage.setItem("stage", JSON.stringify(stage + 1));
     setStage(stage + 1);
   }
 

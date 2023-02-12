@@ -10,8 +10,9 @@ import {
 const CreateStyle = { display: "flex", width: "100%", gap: "1px" };
 
 export default function Create() {
-  const [generalData, setGeneralData] = useState(GENERAL_INFO_INITIAL);
   const [isStorageLoaded, setIsStorageLoaded] = useState(false);
+  const [stageData, setStageData] = useState(1);
+  const [generalData, setGeneralData] = useState(GENERAL_INFO_INITIAL);
   const [experienceData, setExperienceData] = useState([WORK_HISTORY_INITIAL]);
   const [educationData, setEducationData] = useState([
     EDUCATION_HISTORY_INITIAL,
@@ -21,17 +22,22 @@ export default function Create() {
     let storageGeneralData = localStorage.getItem("generalData");
     let storageExperienceData = localStorage.getItem("experienceData");
     let storageEducationData = localStorage.getItem("educationData");
+    let stageData = localStorage.getItem("stage");
 
     if (storageGeneralData) {
       setGeneralData(JSON.parse(storageGeneralData));
     }
 
     if (storageExperienceData) {
-      setGeneralData(JSON.parse(storageExperienceData));
+      setExperienceData(JSON.parse(storageExperienceData));
     }
 
     if (storageEducationData) {
-      setGeneralData(JSON.parse(storageEducationData));
+      setEducationData(JSON.parse(storageEducationData));
+    }
+
+    if (stageData) {
+      setStageData(JSON.parse(stageData));
     }
 
     setIsStorageLoaded(true);
@@ -57,6 +63,7 @@ export default function Create() {
       {isStorageLoaded && (
         <>
           <SectionLeft
+            stageData={stageData}
             generalData={generalData}
             experienceData={experienceData}
             educationData={educationData}

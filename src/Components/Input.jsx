@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const InputStyle = {
   height: "38px",
@@ -10,7 +10,12 @@ const InputStyle = {
 
 export default function Input(props) {
   const uploadFileRef = useRef(null);
+
   let [isInputValid, setIsInputValid] = useState(null);
+
+  useEffect(() => {
+    setIsInputValid(props.isValid);
+  }, []);
 
   function getClassName() {
     if (isInputValid === null) return "input";

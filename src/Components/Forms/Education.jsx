@@ -4,18 +4,24 @@ import { EDUCATION_HISTORY_INITIAL, EDUCATION_OPTIONS } from "../../constants";
 
 export default function Education(props) {
   const [inputData, setInputData] = useState([EDUCATION_HISTORY_INITIAL]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    setInputData(props.educationData);
+    setIsDataLoaded(true);
+  }, []);
 
   useEffect(() => {
     for (const educationHistory in inputData) {
       for (const inputName in educationHistory) {
         if (!educationHistory[inputName].isValid) {
-          props.setAllValid(false);
+          props.setCanGoNext(false);
           return;
         }
       }
     }
 
-    props.setAllValid(true);
+    props.setCanGoNext(true);
   }, [inputData]);
 
   function onChange(orderNumber, inputName, inputValue, isValid) {
@@ -27,7 +33,6 @@ export default function Education(props) {
     };
 
     setInputData(inputDataCopy);
-
     props.updateEducationData(inputDataCopy);
   }
 
@@ -43,7 +48,7 @@ export default function Education(props) {
   }
 
   function renderEducationHistory() {
-    return inputData.map((elem, index) => {
+    return inputData.map((data, index) => {
       return (
         <div key={index}>
           <Input
@@ -53,6 +58,8 @@ export default function Education(props) {
             type={"text"}
             pattern="^[ა-ჰ]+$"
             orderNumber={index}
+            value={data.university.value}
+            isValid={data.university.isValid}
           />
           <div
             style={{ display: "flex", justifyContent: "center", gap: "150px" }}
@@ -89,6 +96,8 @@ export default function Education(props) {
                 type={"date"}
                 pattern="^[ა-ჰ]+$"
                 orderNumber={index}
+                value={data.endeddate.value}
+                isValid={data.endeddate.isValid}
               />
             </div>
           </div>
@@ -99,6 +108,8 @@ export default function Education(props) {
             type={"text"}
             pattern="^[ა-ჰ]+$"
             orderNumber={index}
+            value={data.edudescription.value}
+            isValid={data.edudescription.isValid}
           />
         </div>
       );
@@ -107,7 +118,7 @@ export default function Education(props) {
 
   return (
     <div>
-      {renderEducationHistory()}
+      {isDataLoaded && renderEducationHistory()}
       <div
         style={{
           display: "flex",

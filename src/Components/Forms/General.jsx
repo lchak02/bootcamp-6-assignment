@@ -4,20 +4,22 @@ import { GENERAL_INFO_INITIAL } from "../../constants";
 
 export default function General(props) {
   const [inputData, setInputData] = useState(GENERAL_INFO_INITIAL);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
     setInputData(props.generalData);
+    setIsDataLoaded(true);
   }, []);
 
   useEffect(() => {
     for (const key in inputData) {
       if (!inputData[key].isValid) {
-        props.setAllValid(false);
+        props.setCanGoNext(false);
         return;
       }
     }
 
-    props.setAllValid(true);
+    props.setCanGoNext(true);
   }, [inputData]);
 
   function onChange(inputName, inputValue, isValid) {
@@ -31,60 +33,75 @@ export default function General(props) {
   }
 
   return (
-    <>
-      <div style={{ display: "flex", justifyContent: "center", gap: "260px" }}>
-        <Input
-          onChange={onChange}
-          name={"name"}
-          label={"სახელი"}
-          type={"text"}
-          pattern="^[ა-ჰ]+$"
-          minLength={2}
-          value={inputData.name.value}
-        />
-        <Input
-          onChange={onChange}
-          name={"surname"}
-          label={"გვარი"}
-          type={"text"}
-          pattern="^[ა-ჰ]+$"
-          minLength={2}
-          value={inputData.surname.value}
-        />
-      </div>
-      <Input
-        onChange={onChange}
-        name={"image"}
-        label={["პირადი ფოტოს ატვირთვა", "ატვირთვა"]}
-        type={"file"}
-      />
-      <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
-        <Input
-          onChange={onChange}
-          name={"aboutus"}
-          label={"ჩემ შესახებ(არასავალდებულო)"}
-          type={"text"}
-          value={inputData.aboutus.value}
-        />
+    <div>
+      {isDataLoaded && (
+        <>
+          <div
+            style={{ display: "flex", justifyContent: "center", gap: "260px" }}
+          >
+            <Input
+              onChange={onChange}
+              name={"name"}
+              label={"სახელი"}
+              type={"text"}
+              pattern="^[ა-ჰ]+$"
+              minLength={2}
+              value={inputData.name.value}
+              isValid={inputData.name.isValid}
+            />
+            <Input
+              onChange={onChange}
+              name={"surname"}
+              label={"გვარი"}
+              type={"text"}
+              pattern="^[ა-ჰ]+$"
+              minLength={2}
+              value={inputData.surname.value}
+              isValid={inputData.surname.isValid}
+            />
+          </div>
+          <Input
+            onChange={onChange}
+            name={"image"}
+            label={["პირადი ფოტოს ატვირთვა", "ატვირთვა"]}
+            type={"file"}
+            value={inputData.image.value}
+            isValid={inputData.image.isValid}
+          />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "50px" }}
+          >
+            <Input
+              onChange={onChange}
+              name={"aboutus"}
+              label={"ჩემ შესახებ(არასავალდებულო)"}
+              type={"text"}
+              value={inputData.aboutus.value}
+              isValid={inputData.aboutus.isValid}
+            />
 
-        <Input
-          onChange={onChange}
-          name={"email"}
-          label={"ელ.ფოსტა"}
-          type={"text"}
-          pattern="^[a-zA-Z0-9.]+@redberry.ge$"
-          value={inputData.email.value}
-        />
+            <Input
+              onChange={onChange}
+              name={"email"}
+              label={"ელ.ფოსტა"}
+              type={"text"}
+              pattern="^[a-zA-Z0-9.]+@redberry.ge$"
+              value={inputData.email.value}
+              isValid={inputData.email.isValid}
+            />
 
-        <Input
-          onChange={onChange}
-          name={"number"}
-          label={"მობილურის ნომერი"}
-          type={"text"}
-          pattern="^(\+?995)?(79\d{7}|5\d{8})$"
-          value={inputData.number.value}
-        />
-      </div>
-    </>
+            <Input
+              onChange={onChange}
+              name={"number"}
+              label={"მობილურის ნომერი"}
+              type={"text"}
+              pattern="^(\+?995)?(79\d{7}|5\d{8})$"
+              value={inputData.number.value}
+              isValid={inputData.number.isValid}
+            />
+          </div>
+        </>
+      )}
+    </div>
   );
 }

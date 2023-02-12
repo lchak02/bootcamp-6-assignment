@@ -4,18 +4,24 @@ import { WORK_HISTORY_INITIAL } from "../../constants";
 
 export default function Experience(props) {
   const [inputData, setInputData] = useState([WORK_HISTORY_INITIAL]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    setInputData(props.experienceData);
+    setIsDataLoaded(true);
+  }, []);
 
   useEffect(() => {
     for (const workHistory in inputData) {
       for (const inputName in workHistory) {
         if (!workHistory[inputName].isValid) {
-          props.setAllValid(false);
+          props.setCanGoNext(false);
           return;
         }
       }
     }
 
-    props.setAllValid(true);
+    props.setCanGoNext(true);
   }, [inputData]);
 
   function onChange(orderNumber, inputName, inputValue, isValid) {
@@ -27,7 +33,6 @@ export default function Experience(props) {
     };
 
     setInputData(inputDataCopy);
-
     props.updateExperienceData(inputDataCopy);
   }
 
@@ -36,7 +41,7 @@ export default function Experience(props) {
   }
 
   function renderWorkHistory() {
-    return inputData.map((elem, index) => {
+    return inputData.map((data, index) => {
       return (
         <div key={index}>
           <Input
@@ -46,6 +51,8 @@ export default function Experience(props) {
             type={"text"}
             pattern="[a-zA-Z][a-zA-Z ]+"
             orderNumber={index}
+            value={data.position.value}
+            isValid={data.position.isValid}
           />
           <Input
             onChange={onChange}
@@ -54,6 +61,8 @@ export default function Experience(props) {
             type={"text"}
             pattern="[a-zA-Z][a-zA-Z ]+"
             orderNumber={index}
+            value={data.employee.value}
+            isValid={data.employee.isValid}
           />
           <div
             style={{ display: "flex", justifyContent: "center", gap: "260px" }}
@@ -66,6 +75,8 @@ export default function Experience(props) {
                 type={"date"}
                 pattern="[a-zA-Z][a-zA-Z ]+"
                 orderNumber={index}
+                value={data.started_date.value}
+                isValid={data.started_date.isValid}
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -76,6 +87,8 @@ export default function Experience(props) {
                 type={"date"}
                 pattern="[a-zA-Z][a-zA-Z ]+"
                 orderNumber={index}
+                value={data.ended_date.value}
+                isValid={data.ended_date.isValid}
               />
             </div>
           </div>
@@ -86,6 +99,8 @@ export default function Experience(props) {
             type={"text"}
             pattern="[a-zA-Z][a-zA-Z ]+"
             orderNumber={index}
+            value={data.description.value}
+            isValid={data.description.isValid}
           />
         </div>
       );
@@ -94,7 +109,7 @@ export default function Experience(props) {
 
   return (
     <div>
-      {renderWorkHistory()}
+      {isDataLoaded && renderWorkHistory()}
       <button
         style={{
           width: "247px",
