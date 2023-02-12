@@ -7,9 +7,23 @@ export default function Education(props) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    setInputData(props.educationData);
-    setIsDataLoaded(true);
-  }, []);
+    if (!isDataLoaded) {
+      setInputData(props.educationData);
+      setIsDataLoaded(!isDataLoaded);
+    } else {
+      let newInputData = [...inputData];
+
+      newInputData.forEach(function (value, index) {
+        Object.keys(value).forEach(function (key) {
+          if (props.triggerValidation == true && value[key].isValid == null) {
+            value[key].isValid = false;
+          }
+        });
+      });
+
+      setInputData(newInputData);
+    }
+  }, [props.triggerValidation]);
 
   useEffect(() => {
     for (const educationHistory in inputData) {

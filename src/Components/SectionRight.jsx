@@ -28,15 +28,17 @@ export default function SectionRight(props) {
           <CustomParagraph value={props.generalData.name.value} />
           <CustomParagraph value={props.generalData.surname.value} />
         </div>
-        <img
-          src={props.generalData.image.value}
-          style={{
-            width: "246px",
-            height: "246px",
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
-        />
+        {props.generalData.image.value && (
+          <img
+            src={props.generalData.image.value}
+            style={{
+              width: "246px",
+              height: "246px",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+          />
+        )}
         <div style={{ borderBottom: "1px solid black" }}>
           <CustomParagraph value={props.generalData.email.value} />
           <CustomParagraph value={props.generalData.number.value} />

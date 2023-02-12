@@ -10,6 +10,7 @@ export default function SectionLeft(props) {
 
   const [stage, setStage] = useState(1);
   const [canGoNext, setCanGoNext] = useState(false);
+  const [triggerValidation, setTriggerValidation] = useState(false);
 
   useEffect(() => {
     setStage(props.stageData);
@@ -27,6 +28,7 @@ export default function SectionLeft(props) {
       case 1:
         return (
           <General
+            triggerValidation={triggerValidation}
             generalData={props.generalData}
             setCanGoNext={setCanGoNext}
             updateGeneralData={props.onGeneralChange}
@@ -35,6 +37,7 @@ export default function SectionLeft(props) {
       case 2:
         return (
           <Experience
+            triggerValidation={triggerValidation}
             experienceData={props.experienceData}
             setCanGoNext={setCanGoNext}
             updateExperienceData={props.onExperienceChange}
@@ -43,6 +46,7 @@ export default function SectionLeft(props) {
       case 3:
         return (
           <Education
+            triggerValidation={triggerValidation}
             educationData={props.educationData}
             setCanGoNext={setCanGoNext}
             updateEducationData={props.onEducationChange}
@@ -63,6 +67,7 @@ export default function SectionLeft(props) {
     event.preventDefault();
 
     if (!canGoNext) {
+      setTriggerValidation(true);
       return;
     }
 

@@ -7,9 +7,24 @@ export default function General(props) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    setInputData(props.generalData);
-    setIsDataLoaded(true);
-  }, []);
+    if (!isDataLoaded) {
+      setInputData(props.generalData);
+      setIsDataLoaded(!isDataLoaded);
+    } else {
+      let newInputData = { ...inputData };
+
+      Object.keys(newInputData).forEach(function (key) {
+        if (
+          props.triggerValidation == true &&
+          newInputData[key].isValid == null
+        ) {
+          newInputData[key].isValid = false;
+        }
+      });
+
+      setInputData(newInputData);
+    }
+  }, [props.triggerValidation]);
 
   useEffect(() => {
     for (const key in inputData) {

@@ -15,7 +15,7 @@ export default function Input(props) {
 
   useEffect(() => {
     setIsInputValid(props.isValid);
-  }, []);
+  }, [props.isValid]);
 
   function getClassName() {
     if (isInputValid === null) return "input";

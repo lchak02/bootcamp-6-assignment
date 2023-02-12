@@ -7,9 +7,23 @@ export default function Experience(props) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    setInputData(props.experienceData);
-    setIsDataLoaded(true);
-  }, []);
+    if (!isDataLoaded) {
+      setInputData(props.experienceData);
+      setIsDataLoaded(!isDataLoaded);
+    } else {
+      let newInputData = [...inputData];
+
+      newInputData.forEach(function (value, index) {
+        Object.keys(value).forEach(function (key) {
+          if (props.triggerValidation == true && value[key].isValid == null) {
+            value[key].isValid = false;
+          }
+        });
+      });
+
+      setInputData(newInputData);
+    }
+  }, [props.triggerValidation]);
 
   useEffect(() => {
     for (const workHistory in inputData) {
