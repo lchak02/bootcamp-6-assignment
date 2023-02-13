@@ -68,6 +68,7 @@ export default function Experience(props) {
             value={data.position.value}
             isValid={data.position.isValid}
             hintMessage={"მინიმუმ 2 სიმბოლო"}
+            placeholder={"დეველოპერი, დიზაინერი, ა.შ."}
           />
           <Input
             onChange={onChange}
@@ -79,6 +80,7 @@ export default function Experience(props) {
             value={data.employee.value}
             isValid={data.employee.isValid}
             hintMessage={"მინიმუმ 2 სიმბოლო"}
+            placeholder={"დამსაქმებელი"}
           />
           <div
             style={{ display: "flex", justifyContent: "center", gap: "260px" }}
@@ -117,6 +119,7 @@ export default function Experience(props) {
             orderNumber={index}
             value={data.description.value}
             isValid={data.description.isValid}
+            placeholder={"როლი თანამდებობაზე და ზოგადი აღწერა"}
           />
         </div>
       );

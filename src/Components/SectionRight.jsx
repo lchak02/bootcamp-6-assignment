@@ -36,12 +36,12 @@ export default function SectionRight(props) {
         <div
           style={{
             display: "flex",
-            gap: "15px",
-            fontSize: "25px",
+            gap: "5px",
             color: "#F93B1D",
             position: "relative",
             fontWeight: "700",
-            fontSize: "30px",
+            fontSize: "25px",
+            textAlign: "left",
           }}
         >
           <CustomParagraph value={props.generalData.name.value} />
@@ -51,8 +51,9 @@ export default function SectionRight(props) {
           style={{
             display: "flex",
             flexDirection: "column",
-            paddingRight: "250px",
-            maxWidth: "100px",
+            // paddingRight: "250px",
+            textAlign: "left",
+            maxWidth: "300px",
           }}
         >
           <div style={{ display: "flex" }}>
@@ -64,12 +65,26 @@ export default function SectionRight(props) {
           <div
             style={{
               display: "flex",
+              textAlign: "left",
+              width: "300px",
             }}
           >
             <CustomParagraph value={props.generalData.aboutus.value} />
           </div>
         </div>
 
+        {props.stageData >= 2 && (
+          <h3
+            style={{
+              display: "flex",
+              color: "#F93B1D",
+              fontSize: "20px",
+              borderTop: "1px solid black",
+            }}
+          >
+            გამოცდილება
+          </h3>
+        )}
         {props.experienceData.map((data, index) => {
           return (
             <div
@@ -79,30 +94,46 @@ export default function SectionRight(props) {
                 flexDirection: "column",
               }}
             >
-              <div style={{ display: "flex", gap: "15px", fontSize: "20px" }}>
+              <div style={{ display: "flex", gap: "10px", fontSize: "18px" }}>
                 <CustomParagraph value={data.position.value} />
                 <CustomParagraph value={data.employee.value} />
               </div>
-              <div style={{ display: "flex", gap: "20px" }}>
+              <div style={{ display: "flex", gap: "10px" }}>
                 <CustomParagraph value={data.started_date.value} />
                 <CustomParagraph value={data.ended_date.value} />
               </div>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", textAlign: "left" }}>
                 <CustomParagraph value={data.description.value} />
               </div>
             </div>
           );
         })}
 
+        {props.stageData >= 3 && (
+          <h3
+            style={{
+              display: "flex",
+              color: "#F93B1D",
+              fontSize: "18px",
+              borderTop: "1px solid black",
+            }}
+          >
+            განათლება
+          </h3>
+        )}
         {props.educationData.map((data, index) => {
           return (
             <div key={index}>
-              <div style={{ display: "flex", gap: "10px" }}>
+              <div style={{ display: "flex", textAlign: "left", gap: "10px" }}>
                 <CustomParagraph value={data.university.value} />
                 <CustomParagraph value={data.degree.value} />
               </div>
-              <CustomParagraph value={data.endeddate.value} />
-              <CustomParagraph value={data.edudescription.value} />
+              <div style={{ textAlign: "left" }}>
+                <CustomParagraph value={data.endeddate.value} />
+              </div>
+              <div style={{ textAlign: "left" }}>
+                <CustomParagraph value={data.edudescription.value} />
+              </div>
             </div>
           );
         })}

@@ -4,10 +4,10 @@ import General from "./forms/General";
 import Education from "./forms/Education";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import cleanUpLocalStorage from "../utils";
 
 export default function SectionLeft(props) {
   const navigate = useNavigate();
-
   const [stage, setStage] = useState(1);
   const [canGoNext, setCanGoNext] = useState(false);
   const [triggerValidation, setTriggerValidation] = useState(false);
@@ -19,8 +19,11 @@ export default function SectionLeft(props) {
   function previousStage() {
     if (stage === 1) return;
 
-    localStorage.setItem("stageData", JSON.stringify(stage - 1));
-    setStage(stage - 1);
+    let newStage = stage - 1;
+
+    localStorage.setItem("stageData", JSON.stringify(newStage));
+    setStage(newStage);
+    props.onStageChange(newStage);
   }
 
   function renderForm() {
@@ -56,11 +59,7 @@ export default function SectionLeft(props) {
   }
 
   function handleGoBack() {
-    localStorage.removeItem("generalData");
-    localStorage.removeItem("experienceData");
-    localStorage.removeItem("educationData");
-    localStorage.removeItem("stageData");
-
+    cleanUpLocalStorage();
     navigate("/");
   }
 
@@ -73,11 +72,15 @@ export default function SectionLeft(props) {
     }
 
     if (stage === 3) {
-      navigate("/success");
+      props.goToSuccess();
+      return;
     }
 
-    localStorage.setItem("stageData", JSON.stringify(stage + 1));
-    setStage(stage + 1);
+    let newStage = stage + 1;
+
+    localStorage.setItem("stageData", JSON.stringify(newStage));
+    setStage(newStage);
+    props.onStageChange(newStage);
   }
 
   return (

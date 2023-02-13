@@ -54,11 +54,11 @@ export default function Education(props) {
     setInputData([...inputData, EDUCATION_HISTORY_INITIAL]);
   }
 
-  function onSelect(event) {
+  function onSelect(event, orderNumber) {
     let value = event.target.value;
     let name = event.target.name;
 
-    onChange(name, value, true);
+    onChange(orderNumber, name, value, true);
   }
 
   function renderEducationHistory() {
@@ -71,14 +71,20 @@ export default function Education(props) {
             label={"სასწავლებელი"}
             type={"text"}
             pattern="^[ა-ჰ]+$"
+            placeholder="სასწავლებელი"
             orderNumber={index}
             value={data.university.value}
             isValid={data.university.isValid}
+            hintMessage={"მინიმუმ 2 სიმბოლო"}
           />
-          <div
-            style={{ display: "flex", justifyContent: "center", gap: "150px" }}
-          >
+          <div style={{ display: "flex", gap: "150px" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
+              <label
+                style={{ display: "flex", color: "black", paddingTop: "1px" }}
+                htmlFor=""
+              >
+                ხარისხი
+              </label>
               <select
                 name={"degree"}
                 style={{
@@ -90,7 +96,7 @@ export default function Education(props) {
                   padding: "5px",
                   fontSize: "16px",
                 }}
-                onChange={onSelect}
+                onChange={(event) => onSelect(event, index)}
               >
                 <option value="choose" disabled selected hidden>
                   აირჩიეთ ხარისხი
@@ -102,7 +108,12 @@ export default function Education(props) {
                 ))}
               </select>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Input
                 onChange={onChange}
                 name={"endeddate"}
@@ -121,6 +132,7 @@ export default function Education(props) {
             label={"აღწერა"}
             type={"text"}
             pattern="^[ა-ჰ]+$"
+            placeholder="განათლების აღწერა"
             orderNumber={index}
             value={data.edudescription.value}
             isValid={data.edudescription.isValid}

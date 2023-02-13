@@ -25,7 +25,7 @@ export default function Input(props) {
   }
 
   function matchesPattern(inputValue, inputPattern) {
-    return new RegExp(inputPattern).test(inputValue);
+    return new RegExp(inputPattern).test(inputValue.replace(/\s/g, ""));
   }
 
   function validateOther(inputName, inputValue, isValid) {

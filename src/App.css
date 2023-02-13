@@ -43,3 +43,7 @@
   background: url("./assets/icons/invalidInput.png") center no-repeat;
   right: -1.75rem;
 }
+
+.home {
+  background: url("assets/homeBackground.png") no-repeat center;
+}

@@ -6,10 +6,12 @@ import {
   WORK_HISTORY_INITIAL,
   EDUCATION_HISTORY_INITIAL,
 } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const CreateStyle = { display: "flex", width: "100%", gap: "1px" };
 
 export default function Create() {
+  const navigate = useNavigate();
   const [isStorageLoaded, setIsStorageLoaded] = useState(false);
   const [stageData, setStageData] = useState(1);
   const [generalData, setGeneralData] = useState(GENERAL_INFO_INITIAL);
@@ -43,6 +45,11 @@ export default function Create() {
     setIsStorageLoaded(true);
   }, []);
 
+  const updateStageData = (updatedData) => {
+    setStageData(updatedData);
+    localStorage.setItem("stageData", JSON.stringify(updatedData));
+  };
+
   const updateGeneralData = (updatedData) => {
     setGeneralData({ ...updatedData });
     localStorage.setItem("generalData", JSON.stringify(updatedData));
@@ -58,6 +65,12 @@ export default function Create() {
     localStorage.setItem("educationData", JSON.stringify(updatedData));
   };
 
+  function goToSuccess() {
+    navigate("/success", {
+      state: { generalData, experienceData, educationData },
+    });
+  }
+
   return (
     <div style={CreateStyle}>
       {isStorageLoaded && (
@@ -67,11 +80,14 @@ export default function Create() {
             generalData={generalData}
             experienceData={experienceData}
             educationData={educationData}
+            onStageChange={updateStageData}
             onGeneralChange={updateGeneralData}
             onExperienceChange={updateExperienceData}
             onEducationChange={updateEducationData}
+            goToSuccess={goToSuccess}
           />
           <SectionRight
+            stageData={stageData}
             generalData={generalData}
             experienceData={experienceData}
             educationData={educationData}

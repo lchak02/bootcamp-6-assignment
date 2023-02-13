@@ -64,6 +64,7 @@ export default function General(props) {
               value={inputData.name.value}
               isValid={inputData.name.isValid}
               hintMessage={"მინიმუმ 2 ასო, ქართული ასოებით"}
+              placeholder={"სახელი"}
             />
             <Input
               onChange={onChange}
@@ -75,6 +76,7 @@ export default function General(props) {
               value={inputData.surname.value}
               isValid={inputData.surname.isValid}
               hintMessage={"მინიმუმ 2 ასო, ქართული ასოებით"}
+              placeholder={"გვარი"}
             />
           </div>
           <Input
@@ -93,8 +95,10 @@ export default function General(props) {
               name={"aboutus"}
               label={"ჩემ შესახებ(არასავალდებულო)"}
               type={"text"}
+              pattern="^[ა-ჰ]+$"
               value={inputData.aboutus.value}
               isValid={inputData.aboutus.isValid}
+              placeholder={"ზოგადი ინფო შენ შესახებ"}
             />
 
             <Input
@@ -106,6 +110,7 @@ export default function General(props) {
               value={inputData.email.value}
               isValid={inputData.email.isValid}
               hintMessage={"უნდა მთავრდებოდეს @redberry.ge -ით"}
+              placeholder={"@redberry.ge"}
             />
 
             <Input

@@ -8,6 +8,7 @@ export default function Home() {
   }
   return (
     <div
+      className="home"
       style={{
         backgroundColor: "#F2F2F2",
         padding: "0",
