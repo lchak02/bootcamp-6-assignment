@@ -15,7 +15,7 @@ export default function Education(props) {
 
       newInputData.forEach(function (value, index) {
         Object.keys(value).forEach(function (key) {
-          if (props.triggerValidation == true && value[key].isValid == null) {
+          if (value[key].isValid == null) {
             value[key].isValid = false;
           }
         });
@@ -99,9 +99,6 @@ export default function Education(props) {
                 }}
                 onChange={(event) => onSelect(event, index)}
               >
-                <option value="choose" disabled selected hidden>
-                  აირჩიეთ ხარისხი
-                </option>
                 {EDUCATION_OPTIONS.map((elem) => (
                   <option value={elem} key={elem}>
                     {elem}

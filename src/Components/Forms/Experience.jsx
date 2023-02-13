@@ -15,7 +15,7 @@ export default function Experience(props) {
 
       newInputData.forEach(function (value, index) {
         Object.keys(value).forEach(function (key) {
-          if (props.triggerValidation == true && value[key].isValid == null) {
+          if (value[key].isValid == null) {
             value[key].isValid = false;
           }
         });
