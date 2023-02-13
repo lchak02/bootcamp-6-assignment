@@ -91,7 +91,6 @@ export default function Success() {
         style={{
           height: "100%",
           width: "600px",
-          border: "1px solid white",
           margin: "30px 0px 100px 0px",
           padding: "20px 30px",
           backgroundColor: "white",

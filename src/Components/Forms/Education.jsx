@@ -26,16 +26,17 @@ export default function Education(props) {
   }, [props.triggerValidation]);
 
   useEffect(() => {
+    let goNext = true;
+
     inputData.forEach(function (value, index) {
       Object.keys(value).forEach(function (key) {
         if (!value[key].isValid) {
-          props.setCanGoNext(false);
-          return;
+          goNext = false;
         }
       });
     });
 
-    props.setCanGoNext(true);
+    props.setCanGoNext(goNext);
   }, [inputData]);
 
   function onChange(orderNumber, inputName, inputValue, isValid) {
